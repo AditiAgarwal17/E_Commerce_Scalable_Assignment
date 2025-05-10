@@ -28,9 +28,7 @@ function Footer() {
                             Privacy
                         </Grid>
                     </Grid>
-                        <Grid item xs={4} justifyContent="flex-end"
-                            alignItems="center">Copyright © 2022
-                        </Grid>
+
                 </Grid>
             </Box>
         </footer >

@@ -147,26 +147,36 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <Typography>Notifications</Typography>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          onClick={() => {
+            // Add your action for profile menu item here
+            navigate("/profile");
+          }}
         >
           <AccountCircle />
         </IconButton>
         <Typography>Profile</Typography>
+      </MenuItem>
+
+      {/* Make the cart icon clickable in the mobile menu */}
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="shopping cart"
+          color="inherit"
+          onClick={() => {
+            // Navigate to the cart page when clicked
+            navigate("/cart");
+          }}
+        >
+          <Badge badgeContent={1} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <Typography>Cart</Typography>
       </MenuItem>
     </Menu>
   );
@@ -183,7 +193,6 @@ export default function PrimarySearchAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-
           </IconButton>
           <Link href="/" variant="h5" underline="none"
             noWrap
@@ -221,6 +230,7 @@ export default function PrimarySearchAppBar() {
               size="large"
               aria-label="1 item in your shopping cart"
               color="inherit"
+              onClick={() => navigate("/cart")}  // Cart icon click for desktop
             >
               <Badge badgeContent={1} color="error">
                 <ShoppingCartIcon />
