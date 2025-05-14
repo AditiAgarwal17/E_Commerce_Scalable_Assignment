@@ -41,4 +41,51 @@ recordRoutes.route('/products/sku/:id').get(async function (_req, res) {
     }))
 });
 
+// POST: Add a new product
+recordRoutes.route('/products').post(async function (req, res) {
+  const dbConnect = dbo.getDb();
+  const newProduct = req.body;
+
+  try {
+    const result = await dbConnect.collection('products').insertOne(newProduct);
+    res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error inserting product');
+  }
+});
+
+// PUT: Update product by SKU
+recordRoutes.route('/products/sku/:id').put(async function (req, res) {
+  const dbConnect = dbo.getDb();
+  const skuID = req.params.id;
+  const updates = req.body;
+
+  try {
+    const result = await dbConnect.collection('products').updateOne(
+      { 'variants.sku': skuID },
+      { $set: updates }
+    );
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error updating product');
+  }
+});
+
+// DELETE: Remove product by SKU
+recordRoutes.route('/products/sku/:id').delete(async function (req, res) {
+  const dbConnect = dbo.getDb();
+  const skuID = req.params.id;
+
+  try {
+    const result = await dbConnect.collection('products').deleteOne({ 'variants.sku': skuID });
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting product');
+  }
+});
+
+
 module.exports = recordRoutes;

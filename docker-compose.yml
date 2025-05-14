@@ -1,0 +1,45 @@
+services:
+  product-service:
+    build:
+      context: ./products-cna-microservice
+    image: products:latest
+    container_name: product-service
+    ports:
+      - "5000:5000"
+    platform: linux/amd64
+
+  user-service:
+    build:
+      context: ./users-cna-microservice
+    image: users:latest
+    container_name: user-service
+    ports:
+      - "9090:9090"
+    platform: linux/amd64
+
+  cart-service:
+    build:
+      context: ./cart-cna-microservice
+    image: cart:latest
+    container_name: cart-service
+    ports:
+      - "8080:8080"
+    platform: linux/amd64
+
+  search-service:
+    build:
+      context: ./search-cna-microservice
+    image: search:latest
+    container_name: search-service
+    ports:
+      - "4000:4000"
+    platform: linux/amd64
+
+  store-ui:
+    build:
+      context: ./store-ui
+    image: store-ui:latest
+    container_name: store-ui
+    ports:
+      - "3000:3000"
+    platform: linux/amd64
